@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I Built a Claude Skill That Turns One Blog Post Into 10 Ready-to-Publish Pieces (Free, No Code) | Creator Forge</title>
+<meta name="description" content="The free Claude skill I built that turns one blog post into 10 ready-to-publish pieces — thread, LinkedIn, Reel scripts, newsletter and more — in one consistent voice.">
+<meta property="og:title" content="How I Built a Claude Skill That Turns One Blog Post Into 10 Ready-to-Publish Pieces (Free, No Code)">
+<meta property="og:description" content="The free Claude skill I built that turns one blog post into 10 ready-to-publish pieces — thread, LinkedIn, Reel scripts, newsletter and more — in one consistent voice.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">Creator Forge</a>
+  <span class="tagline">Free AI &amp; Notion systems for solo creators.</span>
+</header>
+<main>
+<article class="post">
+<h1>How I Built a Claude Skill That Turns One Blog Post Into 10 Ready-to-Publish Pieces (Free, No Code)</h1>
+<p>Turning one blog post into a Twitter thread, a LinkedIn post, an Instagram caption, a newsletter, a couple of short-video scripts and a handful of quote cards is the boring tax on content — same idea, rewritten again and again for each platform. Done by hand and done properly, it eats most creators two to four hours per post. It's the easiest thing to skip on a busy day, which is exactly why so much good content never gets repurposed.</p>
+<p>So I built a Claude skill that does the whole thing in one pass. You paste in one long piece — a blog post, a podcast or video transcript, a newsletter — and it hands back <strong>ten</strong> platform-ready short-form pieces, written in one consistent voice, in under a minute. Here's exactly how it works, and how you could build your own — no code, no paid tools.</p>
+<blockquote>
+<p>Quick note on what a "skill" is: in Claude, a skill is a saved set of instructions Claude follows every time, so you don't re-paste a giant prompt. Think of it as a reusable button instead of a one-off request.</p>
+</blockquote>
+<p>Here's an actual run. I fed it a test blog post — "Why Your Content Calendar Is Lying to You" — and asked for the full set. This is the opening of the <strong>X/Twitter thread</strong> it produced, untouched, in the sample creator's voice:</p>
+<blockquote>
+<p><strong>1/</strong> Your content calendar is lying to you. Not gonna lie — I used to think mine was broken. Turns out it was built backward from day one. Here's the fix.</p>
+<p><strong>2/</strong> Most content calendars get planned like a vacation itinerary: block every hour, assume nothing goes wrong. But creating content isn't sightseeing. It's farming. Some days you harvest a lot. Some days, nothing.</p>
+<p><strong>3/</strong> Ask any creator what's hardest and they'll say "ideas." That's rarely true. Six months into a niche, you've got more ideas than you'll use. The real bottleneck is format-switching.</p>
+<p><em>(…thread continues to 12 tweets, then it moves on to the LinkedIn post, the Reel script, and the rest.)</em></p>
+</blockquote>
+<h2>Why 10 pieces from one source beats writing 10 posts</h2>
+<p>One genuinely good idea can become a week or two of content across platforms — but only if repurposing is fast enough that you actually do it. When it takes two hours, you skip it. When it takes a minute, you ship many times more from the same thinking.</p>
+<p>The trap most people fall into is asking Claude "rewrite this as a tweet," then "now a LinkedIn post," ten separate times — slow, and the voice drifts between platforms. A skill fixes both: it holds the format rules <em>and</em> your voice in one place, so every one of the ten outputs is consistent.</p>
+<h2>The 10 pieces it produces</h2>
+<p>In a single run, from one source, it generates:</p>
+<ol>
+<li>An <strong>X/Twitter thread</strong> (8–12 numbered tweets, a standalone hook, a CTA at the end)</li>
+<li>A <strong>standalone X post</strong> — built on a <em>different</em> angle than the thread's hook</li>
+<li>A <strong>LinkedIn post</strong> (150–250 words, hook first line, ends on a question)</li>
+<li>A <strong>carousel</strong> (8–10 slides, one idea per slide)</li>
+<li>A <strong>TikTok/Reel script</strong> (45–60 seconds, hook → 3 beats → CTA, with on-screen text cues)</li>
+<li>A <strong>YouTube Short script</strong> (30 seconds, on a <em>different</em> core idea than the Reel)</li>
+<li>An <strong>Instagram caption</strong> (125–200 words + a clean block of relevant hashtags)</li>
+<li>A <strong>newsletter snippet</strong> (subject, preheader, body, one CTA)</li>
+<li><strong>Three quote cards</strong> (pulled from at least two different ideas)</li>
+<li>A <strong>conversation/poll post</strong> to drive replies</li>
+</ol>
+<p>The reason it doesn't feel repetitive: before writing anything, the skill extracts <strong>4–6 distinct ideas</strong> from the source and deliberately spreads them across the ten pieces, so no single angle gets reused more than a couple of times. That one rule is the difference between real repurposing and posting the same paragraph everywhere.</p>
+<p>Here's the actual anti-repetition rule from inside the skill — the thing that stops the ten pieces from being one idea reformatted ten times:</p>
+<blockquote>
+<p>The 10 pieces must not be the same idea reformatted 10 times… no single angle should be reused as the primary angle for more than 2-3 pieces… the TikTok/Reel script and the YouTube Short script MUST use two different central ideas from each other — never the same script reused.</p>
+</blockquote>
+<h2>The parts that make it not sound like generic AI</h2>
+<p>Two things separate this from a plain "make me some posts" prompt:</p>
+<p><strong>A voice profile.</strong> Before generating, the skill loads a short profile of how <em>you</em> write — your signature phrases, sentence length, whether you use emojis, words you never use. Every one of the ten pieces is written against that profile. This is the part most automation tools get wrong: they can format fast, but they can't sound like you unless you tell them, specifically, what "you" sounds like. (I built this as its own step — a <code>voice-setup</code> companion that creates the profile once, then every future run uses it.)</p>
+<p><strong>A mandatory quality checklist.</strong> Before it shows you anything, the skill runs three checks: a voice check (does each piece match the profile?), an anti-placeholder check (no <code>[insert link]</code>, no half-finished sentences — every piece is copy-paste ready), and an anti-invention check (every fact, number, or quote must trace back to the source — it's not allowed to make things up). Nothing gets delivered until those pass.</p>
+<p>It also handles the annoying edge cases: it detects whether your source is in English or Spanish and writes the outputs in that language; it refuses to pad thin input under ~300 words instead of inventing filler; and if you paste a bare YouTube link, it walks you through grabbing the transcript rather than guessing what the video said.</p>
+<h2>What you actually get out of it</h2>
+<p>One long-form article becomes ten distinct, platform-shaped pieces — in under a minute — saved to a file, ready to schedule. You still edit, but you're polishing near-finished drafts instead of starting from a blank page ten separate times. And you can ask it to regenerate any single piece ("give me a different LinkedIn post") without re-running the whole thing.</p>
+<p>The honest limitations: it won't invent a good idea for you — garbage in, garbage out. In testing, the shorter pieces occasionally drift close in structure, which is exactly what the quality checklist is there to catch. And the voice profile matters: skip it, and the output sounds like everyone else's AI.</p>
+<p>And the same source, distilled by the skill into a single <strong>standalone post</strong> — a completely different angle from the thread's opening:</p>
+<blockquote>
+<p>Everyone treats "coming up with ideas" as the hard part of content. It's not. The hard part is the mental tax you pay every time you switch from long-form thinking to a 150-character punchline. That's the actual bottleneck.</p>
+</blockquote>
+<p>One source. Ten distinct pieces. No paragraph reused twice.</p>
+<h2>Want the skill without building it?</h2>
+<p>I packaged the exact skill — the 10-piece repurposer plus the voice-profile setup — as a plug-and-play version you can install and use in minutes: <strong><a href="https://getcreatorforge.gumroad.com/l/content-repurposer">content-repurposer on Gumroad</a></strong>. There's a <strong><a href="https://getcreatorforge.gumroad.com/l/content-repurposer-lite">free lite version</a></strong> too, if you just want to test the workflow first.</p>
+<p>And if you want somewhere to keep your voice rules and prompts organized, a simple Notion setup works well — <a href="https://www.notion.so">Notion</a>. Having the system in one place means you're not hunting for a prompt mid-batch.</p>
+<h2>The one thing that makes this work</h2>
+<p>Consistency beats cleverness. The point isn't a magic prompt — it's that the skill runs the <em>same</em> rules and the <em>same</em> voice every time, so a one-minute repurpose is as on-brand as something you'd have sweated over for two hours. Build it once, and the boring part of content stops being a reason to skip a day.</p>
+<hr />
+<p><em>Do you repurpose your content by hand, or have you automated it? Tell me what platform eats the most of your time.</em></p>
+</article>
+</main>
+<footer class="site-footer">
+  <p>&copy; 2026 Creator Forge. Build a one-person content machine.</p>
+</footer>
+</body>
+</html>
